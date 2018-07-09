@@ -1,27 +1,24 @@
-#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import sys,os,re,math
 import pygame as pg
+from settings import Settings
+from ship import Ship
+import game_functions as gf
 
 def run_game ():
-	#³õÊ¼»¯ÓÎÏ·²¢´´½¨Ò»¸öÆÁÄ»¶ÔÏó
-	pg.init()
-	screen = pg.display.set_mode((1280,720))
-	pg.display.set_caption("Alien Invasion")
-	#ÉèÖÃ±³¾°É«
-	bg_color=(230,230,230)
-	
-	#¿ªÊ¼ÓÎÏ·Ö÷Ñ­»·
-	while True:
-		#¼àÊÓ¼üÅÌºÍÊó±êÊÂ¼ş
-		for event in pg.event.get():
-			if event.type==pg.QUIT:
-				sys.exit()
-		
-		#Ã¿´ÎÑ­»·¶¼ÖØ»æÆÁÄ»
-		screen.fill(bg_color)
-		
-		#ÈÃ×î½ü»æÖÆµÄÆÁÄ»¿É¼û
-		pg.display.flip()
-		
+    #åˆå§‹åŒ–æ¸¸æˆå¹¶åˆ›å»ºä¸€ä¸ªå±å¹•å¯¹è±¡
+    pg.init()
+    ai_settings=Settings()
+    screen = pg.display.set_mode((ai_settings.screen_width,ai_settings.screen_height))
+    pg.display.set_caption("Alien Invasion")
+
+    #åˆ›å»ºä¸€è‰˜é£èˆ¹
+    ship=Ship(ai_settings,screen)
+    
+    #å¼€å§‹æ¸¸æˆä¸»å¾ªç¯
+    while True:
+        gf.check_events(ship)
+        ship.update()
+        gf.update_screen(ai_settings,screen,ship)
+        
 run_game()
