@@ -2,10 +2,12 @@
 # -*- coding: UTF-8 -*-
 import sys,os,re,math
 import pygame as pg
+from pygame.sprite import Sprite
 
-class Ship():
+class Ship(Sprite):
     def __init__ (self,ai_settings,screen):
         """初始化飞船并设置起初始位置"""
+        super(Ship,self).__init__()
         self.screen=screen
         self.ai_settings=ai_settings
 
